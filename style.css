@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#main-heading {
+    text-align: center;
+}
+
+#score-container div{
+    align-items: center;
+}
+
+.score-board {
+    align-items: center;
+}
+
+button {
+    padding: 8px 15px;
+    border-radius: 8px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: #0069D9;
+}
+
+button:disabled {
+    background-color: #80bdff;
+}
+
+th, td {
+    text-align: center;
+}
