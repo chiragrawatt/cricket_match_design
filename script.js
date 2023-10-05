@@ -125,7 +125,6 @@ function startCountDown() {
         sec--;
         timeDisplay === null || timeDisplay === void 0 ? void 0 : timeDisplay.innerHTML = sec.toString();
         if (sec == 0) {
-            clearInterval(timer);
             endInnings();
         }
     }, 1000);
@@ -172,6 +171,7 @@ function startInnings() {
 }
 function endInnings() {
     resetButtons();
+    clearInterval(timer);
     innings++;
     if (innings == 3) {
         enableElement(resultButton);

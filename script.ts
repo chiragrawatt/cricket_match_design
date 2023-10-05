@@ -149,12 +149,12 @@ const resultButton = document.getElementById("result");
 const teamResult = document.getElementById("winner-display");
 const motmResult = document.getElementById("motm-display");
 const timeDisplay = document.getElementById("timer");
+
 function startCountDown() {
     timer = setInterval(() => {
         sec--;
         timeDisplay?.innerHTML = sec.toString();
         if(sec==0) {
-            clearInterval(timer);
             endInnings();
         }
     }
@@ -209,6 +209,7 @@ function startInnings() {
 
 function endInnings() {
     resetButtons();
+    clearInterval(timer);
     innings++;
     if(innings==3) {
         enableElement(resultButton);
