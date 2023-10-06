@@ -178,7 +178,7 @@ function resetButtons() {
     enableElement(startButton)
 }
 
-function startGame() {
+function resetGame() {
     refreshTable(table1);
     refreshTable(table2);
     teamOneScore?.innerHTML = "0";
@@ -190,7 +190,10 @@ function startGame() {
     team1 = new CricketTeam();
     team2 = new CricketTeam();
     innings = 1;
+}
 
+function startGame() {
+    resetGame();
     startInnings();
 }
 
@@ -198,6 +201,7 @@ function startInnings() {
     row=0;
     col=0;
     setTimer();
+    disableElement(startButton);
     if(innings==1) {
         enableElement(hitButton1);
     } else if(innings==2) {
@@ -259,3 +263,5 @@ function generateResult() {
     teamResult?.innerHTML = `${result.winnerTeam} won by ${result.runDifference} runs`;
     motmResult?.innerHTML = `Man of the match is ${result.manOfTheMatch}`;
 }
+
+resetButtons();

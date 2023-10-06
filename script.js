@@ -142,7 +142,7 @@ function resetButtons() {
     startButton === null || startButton === void 0 ? void 0 : startButton.textContent = "START";
     enableElement(startButton);
 }
-function startGame() {
+function resetGame() {
     refreshTable(table1);
     refreshTable(table2);
     teamOneScore === null || teamOneScore === void 0 ? void 0 : teamOneScore.innerHTML = "0";
@@ -153,12 +153,16 @@ function startGame() {
     team1 = new CricketTeam();
     team2 = new CricketTeam();
     innings = 1;
+}
+function startGame() {
+    resetGame();
     startInnings();
 }
 function startInnings() {
     row = 0;
     col = 0;
     setTimer();
+    disableElement(startButton);
     if (innings == 1) {
         enableElement(hitButton1);
     }
@@ -212,3 +216,4 @@ function generateResult() {
     teamResult === null || teamResult === void 0 ? void 0 : teamResult.innerHTML = "".concat(result.winnerTeam, " won by ").concat(result.runDifference, " runs");
     motmResult === null || motmResult === void 0 ? void 0 : motmResult.innerHTML = "Man of the match is ".concat(result.manOfTheMatch);
 }
+resetButtons();
