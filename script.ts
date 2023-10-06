@@ -83,7 +83,7 @@ function createTable(tableId: string) {
 function refreshTable(table: Array<NodeList>) {
     for(let i=0; i<table.length;i++) {
         for(let j=0; j<table[i].length; j++) {
-            table[i][j].innerHTML = "";
+            (table[i][j] as HTMLElement).innerHTML = "";
         }
     }
 }
@@ -112,20 +112,20 @@ function getResult() {
     return {winnerTeam, manOfTheMatch, runDifference};
 }
 
-function disableElement(el: any) {
+function disableElement(el: HTMLElement) {
     el.setAttribute("disabled", "");
 }
 
-function enableElement(el: any) {
+function enableElement(el: HTMLElement) {
     el.removeAttribute("disabled");
 }
 
-function hideElement(el: any) {
-    el?.style.display = "none";
+function hideElement(el: HTMLElement) {
+    el.style.display = "none";
 }
 
-function showElement(el: any) {
-    el?.style.display = "contents";
+function showElement(el: HTMLElement) {
+    el.style.display = "contents";
 }
 
 
@@ -135,25 +135,25 @@ let innings : number;
 let row: number;
 let col: number;
 let sec : number;
-let timer;
+let timer : number;
 
 //Initialzing elements using DOM
 const table1 : Array<NodeList> = getTableMatrix("team1-table");
 const table2 : Array<NodeList> = getTableMatrix("team2-table");
-const teamOneScore = document.getElementById("team1-score");
-const teamTwoScore = document.getElementById("team2-score");
-const hitButton1 = document.getElementById("hit1");
-const hitButton2 = document.getElementById("hit2");
-const startButton = document.getElementById("start");
-const resultButton = document.getElementById("result");
-const teamResult = document.getElementById("winner-display");
-const motmResult = document.getElementById("motm-display");
-const timeDisplay = document.getElementById("timer");
+const teamOneScore : HTMLHeadingElement = document.getElementById("team1-score") as HTMLHeadingElement;
+const teamTwoScore : HTMLHeadingElement = document.getElementById("team2-score") as HTMLHeadingElement;
+const hitButton1 : HTMLButtonElement = document.getElementById("hit1") as HTMLButtonElement;
+const hitButton2 : HTMLButtonElement = document.getElementById("hit2") as HTMLButtonElement;
+const startButton : HTMLButtonElement = document.getElementById("start") as HTMLButtonElement;
+const resultButton : HTMLButtonElement = document.getElementById("result") as HTMLButtonElement;
+const teamResult : HTMLHeadingElement = document.getElementById("winner-display") as HTMLHeadingElement;
+const motmResult : HTMLHeadingElement = document.getElementById("motm-display") as HTMLHeadingElement;
+const timeDisplay : HTMLHeadingElement = document.getElementById("timer") as HTMLHeadingElement;
 
 function startCountDown() {
     timer = setInterval(() => {
         sec--;
-        timeDisplay?.innerHTML = sec.toString();
+        timeDisplay.innerHTML = sec.toString();
         if(sec==0) {
             endInnings();
         }
@@ -163,7 +163,7 @@ function startCountDown() {
 
 function setTimer() {
     sec = 60;
-    timeDisplay?.innerHTML = sec.toString();
+    timeDisplay.innerHTML = sec.toString();
     clearInterval(timer);
     startCountDown();
 }
@@ -174,15 +174,15 @@ function resetButtons() {
     disableElement(hitButton1);
     disableElement(hitButton2);
     disableElement(resultButton);
-    startButton?.textContent = "START";
+    startButton.textContent = "START";
     enableElement(startButton)
 }
 
 function resetGame() {
     refreshTable(table1);
     refreshTable(table2);
-    teamOneScore?.innerHTML = "0";
-    teamTwoScore?.innerHTML = "0";
+    teamOneScore.innerHTML = "0";
+    teamTwoScore.innerHTML = "0";
     teamResult.innerHTML = "";
     motmResult.innerHTML = "";
     resetButtons();
@@ -217,22 +217,22 @@ function endInnings() {
     innings++;
     if(innings==3) {
         enableElement(resultButton);
-        startButton?.textContent = "RESTART";
+        startButton.textContent = "RESTART";
     }
 }
 
-function playBall(team: CricketTeam, table: Array<NodeList>, scoreBoard: Object) {
+function playBall(team: CricketTeam, table: Array<NodeList>, scoreBoard: HTMLElement) {
     let run = team.playBall();
 
-    scoreBoard?.innerHTML = team.teamScore;
+    scoreBoard.innerHTML = team.teamScore.toString();
 
     if(run === 0) {
-        table[row][col].innerHTML = "W";
+        (table[row][col] as HTMLElement).innerHTML = "W";
     } else {
-        table[row][col].innerHTML = run.toString();
+        (table[row][col]  as HTMLElement).innerHTML = run.toString();
     }
 
-    table[row][table[row].length-1].innerHTML = team.players[team.activePlayer].totalScore.toString();
+    (table[row][table[row].length-1]  as HTMLElement).innerHTML= team.players[team.activePlayer].totalScore.toString();
 
     col++;
 
@@ -260,8 +260,8 @@ function hitTwoListener() {
 
 function generateResult() {
     let result = getResult();
-    teamResult?.innerHTML = `${result.winnerTeam} won by ${result.runDifference} runs`;
-    motmResult?.innerHTML = `Man of the match is ${result.manOfTheMatch}`;
+    teamResult.innerHTML = `${result.winnerTeam} won by ${result.runDifference} runs`;
+    motmResult.innerHTML = `Man of the match is ${result.manOfTheMatch}`;
 }
 
 resetButtons();

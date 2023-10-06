@@ -96,10 +96,10 @@ function enableElement(el) {
     el.removeAttribute("disabled");
 }
 function hideElement(el) {
-    el === null || el === void 0 ? void 0 : el.style.display = "none";
+    el.style.display = "none";
 }
 function showElement(el) {
-    el === null || el === void 0 ? void 0 : el.style.display = "contents";
+    el.style.display = "contents";
 }
 var team1;
 var team2;
@@ -123,7 +123,7 @@ var timeDisplay = document.getElementById("timer");
 function startCountDown() {
     timer = setInterval(function () {
         sec--;
-        timeDisplay === null || timeDisplay === void 0 ? void 0 : timeDisplay.innerHTML = sec.toString();
+        timeDisplay.innerHTML = sec.toString();
         if (sec == 0) {
             endInnings();
         }
@@ -131,7 +131,7 @@ function startCountDown() {
 }
 function setTimer() {
     sec = 60;
-    timeDisplay === null || timeDisplay === void 0 ? void 0 : timeDisplay.innerHTML = sec.toString();
+    timeDisplay.innerHTML = sec.toString();
     clearInterval(timer);
     startCountDown();
 }
@@ -139,14 +139,14 @@ function resetButtons() {
     disableElement(hitButton1);
     disableElement(hitButton2);
     disableElement(resultButton);
-    startButton === null || startButton === void 0 ? void 0 : startButton.textContent = "START";
+    startButton.textContent = "START";
     enableElement(startButton);
 }
 function resetGame() {
     refreshTable(table1);
     refreshTable(table2);
-    teamOneScore === null || teamOneScore === void 0 ? void 0 : teamOneScore.innerHTML = "0";
-    teamTwoScore === null || teamTwoScore === void 0 ? void 0 : teamTwoScore.innerHTML = "0";
+    teamOneScore.innerHTML = "0";
+    teamTwoScore.innerHTML = "0";
     teamResult.innerHTML = "";
     motmResult.innerHTML = "";
     resetButtons();
@@ -179,12 +179,12 @@ function endInnings() {
     innings++;
     if (innings == 3) {
         enableElement(resultButton);
-        startButton === null || startButton === void 0 ? void 0 : startButton.textContent = "RESTART";
+        startButton.textContent = "RESTART";
     }
 }
 function playBall(team, table, scoreBoard) {
     var run = team.playBall();
-    scoreBoard === null || scoreBoard === void 0 ? void 0 : scoreBoard.innerHTML = team.teamScore;
+    scoreBoard.innerHTML = team.teamScore.toString();
     if (run === 0) {
         table[row][col].innerHTML = "W";
     }
@@ -213,7 +213,7 @@ function hitTwoListener() {
 }
 function generateResult() {
     var result = getResult();
-    teamResult === null || teamResult === void 0 ? void 0 : teamResult.innerHTML = "".concat(result.winnerTeam, " won by ").concat(result.runDifference, " runs");
-    motmResult === null || motmResult === void 0 ? void 0 : motmResult.innerHTML = "Man of the match is ".concat(result.manOfTheMatch);
+    teamResult.innerHTML = "".concat(result.winnerTeam, " won by ").concat(result.runDifference, " runs");
+    motmResult.innerHTML = "Man of the match is ".concat(result.manOfTheMatch);
 }
 resetButtons();
